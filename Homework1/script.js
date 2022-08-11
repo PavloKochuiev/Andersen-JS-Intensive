@@ -19,10 +19,13 @@ convert();
 
 function calc() {
   const firstNumber = +prompt('Введите первое число:');
+
   if (Number.isNaN(firstNumber)) {
     return console.error('Некорректный ввод!');
   }
+
   const secondNumber = +prompt('Введите второе число:');
+
   if (Number.isNaN(secondNumber)) {
     return console.error('Некорректный ввод!');
   }
