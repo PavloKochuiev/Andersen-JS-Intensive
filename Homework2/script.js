@@ -1,4 +1,5 @@
 function makeObjectDeepCopy(input) {
+
   if (typeof input !== 'object') {
     return input;
   }
@@ -15,6 +16,7 @@ function makeObjectDeepCopy(input) {
 }
 
 function selectFromInterval(array, firstRange, secondRange) {
+
   const isNotValidArray = !array.every(Number);
   const isNotValidRange = typeof firstRange !== 'number' || typeof secondRange !== 'number';
 
@@ -47,6 +49,7 @@ const myIterable = {
 };
 
 myIterable[Symbol.iterator] = function () {
+
   let current = this.from;
   let last = this.to;
 
