@@ -53,7 +53,9 @@ myIterable[Symbol.iterator] = function () {
   let current = this.from;
   let last = this.to;
 
-  if (current > last || !current || !last || typeof current !== 'number' || typeof current !== 'number') {
+  const isNotValid = current > last || !current || !last || typeof current !== 'number' || typeof current !== 'number';
+
+  if (isNotValid) {
     throw new Error('Invalid data, wrong values');
   }
 
