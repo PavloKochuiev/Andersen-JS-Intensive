@@ -1,12 +1,11 @@
 function makeObjectDeepCopy(input) {
-
   if (typeof input !== 'object') {
     return input;
   }
 
-  let copy = Array.isArray(input) ? [] : {};
+  const copy = Array.isArray(input) ? [] : {};
 
-  for (key in input) {
+  for (const key in input) {
     const value = input[key];
 
     copy[key] = makeObjectDeepCopy(value);
@@ -16,7 +15,6 @@ function makeObjectDeepCopy(input) {
 }
 
 function selectFromInterval(array, firstRange, secondRange) {
-
   const isNotValidArray = !array.every(Number);
   const isNotValidRange = typeof firstRange !== 'number' || typeof secondRange !== 'number';
 
@@ -49,7 +47,6 @@ const myIterable = {
 };
 
 myIterable[Symbol.iterator] = function () {
-
   let current = this.from;
   let last = this.to;
 
@@ -66,9 +63,8 @@ myIterable[Symbol.iterator] = function () {
     next() {
       if (this.current <= this.last) {
         return { done: false, value: this.current++ };
-      } else {
-        return { done: true };
       }
+      return { done: true };
     },
   };
 };
