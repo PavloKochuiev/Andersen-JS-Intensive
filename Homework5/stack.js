@@ -1,11 +1,11 @@
 class Stack {
   constructor(maxSize = 10) {
-    if (!Number.isFinite(maxSize)) {
+    if (!Number.isFinite(maxSize) || maxSize <= 0) {
       throw new Error('Not a valid number of quantity');
     }
 
     this.maxSize = maxSize;
-    this.container = [];
+    this.items = [];
     this.count = 0;
   }
 
@@ -15,7 +15,7 @@ class Stack {
     }
 
     const stack = new Stack([...iterable].length);
-    stack.container = [...iterable];
+    stack.items = [...iterable];
 
     return stack;
   }
@@ -25,8 +25,8 @@ class Stack {
       throw new Error('Stack overflow');
     }
 
-    this.container[this.count] = elem;
-    this.count++;
+    this.items[this.count] = elem;
+    this.count += 1;
   }
 
   pop() {
@@ -34,10 +34,9 @@ class Stack {
       throw new Error('Stack is empty');
     }
 
-    const deletedItem = this.container[this.count - 1];
+    let deletedItem = this.items[this.count - 1];
 
-    this.count--;
-    delete this.container[this.count];
+    this.count -= 1;
 
     return deletedItem;
   }
@@ -47,15 +46,15 @@ class Stack {
       return null;
     }
 
-    return this.container[this.count - 1];
+    return this.items[this.count - 1];
   }
 
   isEmpty() {
-    return this.container.length === 0;
+    return this.items.length === 0;
   }
 
   toArray() {
-    return Object.values(this.container);
+    return Object.values(this.items);
   }
 }
 
