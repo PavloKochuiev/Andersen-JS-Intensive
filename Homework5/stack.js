@@ -1,11 +1,18 @@
+class Node {
+  constructor(elem) {
+    this.data = elem;
+    this.next = null;
+  }
+}
+
 class Stack {
   constructor(maxSize = 10) {
     if (!Number.isFinite(maxSize) || maxSize <= 0) {
       throw new Error('Not a valid number of quantity');
     }
 
+    this.top = null;
     this.maxSize = maxSize;
-    this.items = [];
     this.count = 0;
   }
 
@@ -14,8 +21,12 @@ class Stack {
       throw new Error('Non-iterable');
     }
 
-    const stack = new Stack([...iterable].length);
-    stack.items = [...iterable];
+    const valueLength = iterable.length;
+    const stack = new Stack(valueLength);
+
+    for (let value of iterable) {
+      stack.push(value);
+    }
 
     return stack;
   }
@@ -25,8 +36,13 @@ class Stack {
       throw new Error('Stack overflow');
     }
 
-    this.items[this.count] = elem;
-    this.count += 1;
+    const node = new Node(elem);
+
+    node.previous = this.top;
+    this.top = node;
+    this.count++;
+
+    return this.top;
   }
 
   pop() {
@@ -34,27 +50,39 @@ class Stack {
       throw new Error('Stack is empty');
     }
 
-    let deletedItem = this.items[this.count - 1];
+    const deletedElem = this.top;
+    this.top = this.top.previous;
+    this.size--;
 
-    this.count -= 1;
-
-    return deletedItem;
+    return deletedElem.data;
   }
 
   peek() {
-    if (this.count === 0) {
+    if (this.top === null) {
       return null;
     }
 
-    return this.items[this.count - 1];
+    return this.top.data;
   }
 
   isEmpty() {
-    return this.items.length === 0;
+    return this.count === 0;
   }
 
   toArray() {
-    return Object.values(this.items);
+    if (this.top === null) {
+      return null;
+    }
+
+    const arr = [];
+    let current = this.top;
+
+    for (let i = 0; i < this.count; i++) {
+      arr[i] = current.data;
+      current = current.next;
+    }
+
+    return arr.reverse();
   }
 }
 
