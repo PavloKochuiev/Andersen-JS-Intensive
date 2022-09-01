@@ -19,7 +19,7 @@ class Stack {
   static fromIterable(iterable) {
     const isIterable = iterable && Symbol.iterator in Object(iterable);
 
-    if (!isIterable[Symbol.iterator]) {
+    if (!isIterable) {
       throw new Error('Non-iterable');
     }
 
